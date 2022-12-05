@@ -75,7 +75,7 @@ include '../inc/koneksi.php';
                                     <select name='tahun' class='text-input' style="width: 200px;">
                                         <option value="">-- Pilih Tahun --</option>
                                         <?php
-                                        for ($a = 2020; $a <= $nowYear; $a++) {
+                                        for ($a = 2020; $a <= 2021; $a++) {
                                         ?>
                                             <option value='<?= $a ?>'><?= $a ?></option>
                                         <?php
