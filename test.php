@@ -9,6 +9,7 @@ require 'vendor\autoload.php';
 use Phpml\Classification\KNearestNeighbors;
 use Phpml\SupportVectorMachine\Kernel;
 use Phpml\Metric\Accuracy;
+use Phpml\Metric\ClassificationReport;
 
 
 

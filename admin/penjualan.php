@@ -70,8 +70,8 @@ if ($halamanAktif < ($jumlahPagination - $jumlahLink)) {
 
 if ($cari == null) {
     // echo 'kondisi 1';
-    $ambildata_perhalaman = $koneksi->query("SELECT penjualan.id, penjualan.tanggal,pengguna.nama, jenis_ikan.nama_ikan, jenis_ikan.harga, penjualan.jumlah_terjual, penjualan.total_harga FROM penjualan
-    LEFT JOIN jenis_ikan ON jenis_ikan.id = penjualan.id_jenis_ikan  JOIN pengguna ON pengguna.id = penjualan.id_pengguna
+    $ambildata_perhalaman = $koneksi->query("SELECT penjualan.id, penjualan.tanggal,pengguna.nama, s.nama as supplier, jenis_ikan.nama_ikan, jenis_ikan.harga, penjualan.jumlah_terjual, penjualan.total_harga FROM penjualan
+    LEFT JOIN jenis_ikan ON jenis_ikan.id = penjualan.id_jenis_ikan  JOIN pengguna ON pengguna.id = penjualan.id_pengguna join pengguna s on s.id=penjualan.id_supplier
     ORDER BY tanggal
     LIMIT $dataAwal, $jumlahData");
 } elseif ($cari == !null and $bulan == null and $tahun == null) {
@@ -197,11 +197,12 @@ LIMIT $dataAwal, $jumlahData ");
                                 <tr>
                                     <td width="5%">No</td>
                                     <td width="10%">Tanggal</td>
-                                    <td width="11%">Jenis Ikan</td>
+                                    <td width="10%">Jenis Ikan</td>
                                     <td width="12%">Harga</td>
-                                    <td width="12%">Jumlah Terjual</td>
+                                    <td width="11%">Jumlah Terjual</td>
                                     <td width="15%">Total Penjualan</td>
-                                    <td width="15%">Pembeli</td>
+                                    <td width="12%">Supplier</td>
+                                    <td width="12%">Pembeli</td>
                                     <td width="20%">Aksi</td>
                                 </tr>
                             </thead>
@@ -217,6 +218,7 @@ LIMIT $dataAwal, $jumlahData ");
                                         <td style="text-align: right;"><?= rupiah($data['harga']) ?></td>
                                         <td><?= $data['jumlah_terjual'] . " / KG" ?></td>
                                         <td style="text-align: right;"><?= rupiah($data['total_harga']) ?></td>
+                                        <td style="text-align: center;"><?= $data['supplier']?></td>
                                         <td style="text-align: center;"><?= $data['nama']?></td>
                                         <td align="center">
                                             <a href="penjualan_edit.php?id=<?= $data['id'] ?>" class="tombol-edit">Edit</span></a>

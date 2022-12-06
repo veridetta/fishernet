@@ -16,7 +16,7 @@ if (isset($_POST['simpan'])) {
 	$sql = $koneksi->query("SELECT * FROM jenis_ikan WHERE id='$id_jenis_ikan'");
 	$harga=$sql->fetch_assoc()['harga'];
 	$total = $jumlah_terjual*$harga; 
-    $sql = $koneksi->query("insert into penjualan (tanggal, id_jenis_ikan, id_pengguna,jumlah_terjual,total_harga) values('$tanggal','$id_jenis_ikan','$id_pengguna','$jumlah_terjual','$total')");
+    $sql = $koneksi->query("insert into penjualan (tanggal, id_jenis_ikan, id_pengguna,id_supplier,jumlah_terjual,total_harga) values('$tanggal','$id_jenis_ikan','$id_pengguna','$id_supplier','$jumlah_terjual','$total')");
     if (!$sql) {
         die('ada masalah query') . mysqli_connect_error();
     } else {
@@ -54,6 +54,23 @@ if (isset($_POST['simpan'])) {
                                     $sql = $koneksi->query("SELECT * FROM jenis_ikan");
                                     while ($data = $sql->fetch_assoc()) {
                                         echo "<option value='$data[id]'>$data[nama_ikan]</option>";
+                                    }
+                                    ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Nama Supplier</h4>
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    <select name="id_supplier" class="text-input" />
+                                    <option value="">-- Pilih Supplier --</option>
+                                    <?php
+                                    $sql = $koneksi->query("SELECT * FROM pengguna WHERE role=3");
+                                    while ($data = $sql->fetch_assoc()) {
+                                        echo "<option value='$data[id]'>$data[nama]</option>";
                                     }
                                     ?>
                                     </select>
