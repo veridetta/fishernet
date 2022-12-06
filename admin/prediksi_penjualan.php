@@ -29,6 +29,17 @@ rst();
                                 <option value='2' style="text-align: left;">2 Bulan</option>
                                 </select>
                             </td>
+                            <td>
+                                    <select name="id_jenis_ikan" class="text-input" />
+                                    <option value="">-- Pilih Ikan --</option>
+                                    <?php
+                                    $sql = $koneksi->query("SELECT * FROM jenis_ikan ");
+                                    while ($data = $sql->fetch_assoc()) {
+                                        echo "<option value='$data[id]'>$data[nama_ikan]</option>";
+                                    }
+                                    ?>
+                                    </select>
+                                </td>
                             <td width="25%">
                                 <input type="number" placeholder="Nilai Alpha" class="text-input" min="0.1" max="0.9" step="0.1" name="alpha">
                             </td>
@@ -84,7 +95,7 @@ include '../test.php';
                                 <?php
                                 $no = 1;
                                 
-                                $sql = $koneksi->query("SELECT DATE_FORMAT(penjualan.tanggal, '%m-%Y') as tanggal, sum(penjualan.total_harga) as jumlah FROM penjualan GROUP BY DATE_FORMAT(penjualan.tanggal, '%Y-%m')");
+                                $sql = $koneksi->query("SELECT DATE_FORMAT(penjualan.tanggal, '%m-%Y') as tanggal, sum(penjualan.total_harga) as jumlah FROM penjualan where penjualan.id_jenis_ikan='$_POST[id_jenis_ikan]' GROUP BY DATE_FORMAT(penjualan.tanggal, '%Y-%m') ");
                                 // $panjang_data = mysqli_num_rows($sql);
                                 // echo ($panjang_data);
                                 $panjang_data = $sql->num_rows;
