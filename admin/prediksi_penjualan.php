@@ -194,7 +194,7 @@ include '../test.php';
                 <div class="card-body">
                     <div class="isi">
                         <h2>Hasil Peramalan Bulan Januari 2022 : <?= rupiah(round($hasil_prediksi)); ?> </h2>
-                        <?= $akurasi;?>
+                        
                         <h2>Akurasi : <?= intval($akurasi*100)?>%</h2>
                     </div>
                     <br>
